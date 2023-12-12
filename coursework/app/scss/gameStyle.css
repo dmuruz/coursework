@@ -119,6 +119,12 @@ button:hover {
   background-color: #2ecc71;
 }
 
+#computer{
+  background-color: #22971c;
+  left: auto;
+  right: 25%;
+}
+
 #start{
   position: absolute;
   left: 45%;

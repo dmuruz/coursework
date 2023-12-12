@@ -37,8 +37,12 @@ const executeMoves1 = () => {
 
 function moveComputer(){
     let computerPosition = parseFloat(window.getComputedStyle(computer).left);
-    if(computerPosition){
-        
+    direction = Math.floor(Math.random() * 2);
+    if(direction == 0 && computerPosition > window.innerWidth / 2 + computer.offsetWidth / 2){
+        computer.style.left = (computerPosition - movementSpeed) + 'px';
+    }
+    else if(direction == 1 && computerPosition < window.innerWidth - 10 - computer.clientWidth/2){
+        computer.style.left = (computerPosition + movementSpeed) + 'px';
     }
 }
 
@@ -54,7 +58,7 @@ function startMatch(){
 
     let xVelocity = 0;
     let yVelocity = 0;
-    let column = document.getElementById('column3');
+    let column = document.getElementById('column2');
     
     function update() {
         executeMoves1();
@@ -63,7 +67,6 @@ function startMatch(){
             xVelocity = 8;
         }
         if(yVelocity <= -8){
-            console.log(yVelocity);
             yVelocity = -8;
         }
         x += xVelocity;
