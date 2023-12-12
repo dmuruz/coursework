@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="app/scss/gameStyle.css" />
+    <title>VolleyBall</title>
+  </head>
+  <body>
+    <div id="menu-container">
+        <h1>Выберите режим игры</h1>
+        <label for="username">Введите ваше имя: </label>
+        <input type="text" id="username" placeholder="Ваше имя">
+        
+        <div class="button-group">
+          <button onclick="startGame('training')">Тренировка</button>
+          <button onclick="startGame('one-player')">Игра с компьютером</button>
+          <button onclick="startGame('two-players')">2 игрока</button>
+        </div>
+        <button onclick="showLeaderboard()">Таблица лидеров</button>
+    </div>
+
+    <div id="training-container" class="game-container">
+      <button onclick="showMainMenu()">В главное меню</button>
+      <div id="energy-bar">
+        <div id="filler"></div>
+      </div>
+      <div id="ball1" class="ball"></div>
+      <!-- <div id="player"></div> -->
+      <div id="column1" class="column"></div>
+      <div class="ground"></div>
+    </div>
+
+    <div id="training-end-menu">
+      <h2 id="score-text">Ваш счет: 0</h2>
+      <div class="button-group">
+        <button onclick="setupTraining()">Играть снова</button>
+        <button onclick="showMainMenu()">В главное меню</button>
+      </div>
+    </div>
+
+    <div id="one-player-container" class="game-container">
+      <h1 id="score1" class="score">0:0</h1>
+      <button onclick="showMainMenu()">В главное меню</button>
+      <button onclick="startMatch()" id="start">Начать игру</button>
+      <div id="player" class="player"></div>
+      <div id="computer" class="player"></div>
+      <div id="column2" class="column"></div>
+      <div id="ball2" class="ball"></div>
+      <div class="ground"></div>
+    </div>
+
+    <div id="two-players-container" class="game-container">
+      <h1 id="score" class="score">0:0</h1>
+      <button onclick="showMainMenu()">В главное меню</button>
+      <button onclick="startMatch2()" id="start">Начать игру</button>
+      <div id="player1" class="player"></div>
+      <div id="player2" class="player"></div>
+      <div id="column3" class="column"></div>
+      <div id="ball3" class="ball"></div>
+      <div class="ground"></div>
+    </div>
+
+    <div id="leaderboard">
+      <h2>Таблица лидеров</h2>
+
+      <table id="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Место</th>
+            <th>Игрок</th>
+            <th>Счёт</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+
+    <script src="app/js/gameScript.js"></script>
+    <script src="app/js/trainingMode.js"></script>
+    <script src="app/js/twoPlayersMode.js"></script>
+    <script src="app/js/onePlayerMode.js"></script>
+    </body>
+</html>
