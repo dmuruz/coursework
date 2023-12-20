@@ -1,13 +1,16 @@
 let player1 = document.getElementById('player1');
 let player2 = document.getElementById('player2');
 let ball3 = document.getElementById('ball3');
+let column3= document.getElementById('column3');
 let score1 = 0;
 let score2 = 0;
 let scoreText = document.getElementById('score');
 const movementSpeed = 5;
 let controller = {
     'a': {pressed: false, direction: 'left', id: 1},
+    'ф': {pressed: false, direction: 'left', id: 1},
     'd': {pressed: false, direction: 'right', id: 1},
+    'в': {pressed: false, direction: 'right', id: 1},
     'ArrowLeft': {pressed: false, direction: 'left', id: 2},
     'ArrowRight': {pressed: false, direction: 'right', id: 2},
 };
@@ -54,14 +57,28 @@ ball3.style.top = '150px';
 const gravity = 0.1;
 
 function startMatch2(){
+    twoPlayersContainer.removeChild(ball3);
+    ball3 = document.createElement('div');
+    ball3.classList.add('ball');
+    ball3.id = 'ball1';
+    ball3.style.left = '150px';
+    ball3.style.bottom = '120px';
+    ball3.style.backgroundColor = colors[Math.floor(Math.random() * 3)];
     ball3.style.left = '300px';
     ball3.style.top = '150px';
+    twoPlayersContainer.appendChild(ball3);
+    twoPlayersContainer.removeChild(column3);
+    column3 = document.createElement('div');
+    column3.classList.add('column');
+    column3.id = 'column3';
+    column3.style.height = 35 + Math.floor(Math.random() * 10) + '%';
+    twoPlayersContainer.appendChild(column3);
     let x = 300;
     let y = 150;
 
     let xVelocity = 0;
     let yVelocity = 0;
-    let column = document.getElementById('column3');
+    
     
     function update() {
         executeMoves();
@@ -101,7 +118,7 @@ function startMatch2(){
         if (y + ball3.offsetHeight >= window.innerHeight - 100) {
             xVelocity = 0;
             yVelocity = 0;
-            if(x < column.offsetLeft){
+            if(x < column3.offsetLeft){
                 score2++;
             }
             else{
@@ -112,9 +129,9 @@ function startMatch2(){
         }
     
         if (
-            x + ball3.offsetWidth > column.offsetLeft &&
-            x < column.offsetLeft + column.offsetWidth &&
-            y + ball3.offsetHeight > column.offsetTop
+            x + ball3.offsetWidth > column3.offsetLeft &&
+            x < column3.offsetLeft + column3.offsetWidth &&
+            y + ball3.offsetHeight > column3.offsetTop
         ) {
             xVelocity = -xVelocity;
         }

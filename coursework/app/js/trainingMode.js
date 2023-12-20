@@ -1,8 +1,11 @@
 var score = 0;
 let energy = 0;
 let ball1 = document.getElementById('ball1');
+let colors = ['red', 'green', 'blue'];
+let column1 = document.getElementById('column1');
+
 document.addEventListener('DOMContentLoaded', function () {
-    let column = document.getElementById('column1');
+    
     const filler = document.getElementById('filler');
     let isMouseDown = false;
     let isFilling = true;
@@ -44,14 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
             y += yVelocity;
             yVelocity += gravity;
 
-            if (x  <= 0 || x + ball1.offsetHeight >= window.innerWidth - 20) {
+            if (ball1.offsetHeight >= window.innerWidth - 20) {
                 endTraining(score);
             } 
 
             if (y + ball1.offsetHeight >= window.innerHeight - ground.offsetHeight) {
                 xVelocity = 0;
                 yVelocity = 0;
-                if(x < column.offsetLeft){
+                if(x < column1.offsetLeft){
+                    
                     endTraining(score);
                     isMoving = false;
                     return;
@@ -65,9 +69,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (
-                x + ball1.offsetWidth > column.offsetLeft &&
-                x < column.offsetLeft + column.offsetWidth &&
-                y + ball1.offsetHeight > column.offsetTop
+                x + ball1.offsetWidth > column1.offsetLeft &&
+                x < column1.offsetLeft + column1.offsetWidth &&
+                y + ball1.offsetHeight > column1.offsetTop
             ) {
                 xVelocity = -xVelocity;
             }
@@ -109,8 +113,20 @@ function setupTraining(){
     setupBall();
 }
 function setupBall(){
-    energy = 0;
+    trainingContainer.removeChild(ball1);
+    ball1 = document.createElement('div');
+    ball1.classList.add('ball');
+    ball1.id = 'ball1';
     ball1.style.left = '150px';
     ball1.style.bottom = '120px';
+    ball1.style.backgroundColor = colors[Math.floor(Math.random() * 3)];
+    trainingContainer.appendChild(ball1);
+    trainingContainer.removeChild(column1);
+    column1 = document.createElement('div');
+    column1.classList.add('column');
+    column1.id = 'column1';
+    column1.style.height = 35 + Math.floor(Math.random() * 10) + '%';
+    trainingContainer.appendChild(column1);
+    energy = 0;
     filler.style.width = '0%';
 }

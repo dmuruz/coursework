@@ -6,6 +6,7 @@ let onePlayerContainer = document.getElementById('one-player-container');
 let twoPlayersContainer = document.getElementById('two-players-container');
 let usernameInput = document.getElementById('username');
 let leaderboard = document.getElementById("leaderboard");
+let leaderboardBody = document.getElementById("leaderboard-table").getElementsByTagName("tbody")[0];
 let username = '';
 let isLeaderboardActive = false;
 var playersLeaderboard = JSON.parse(localStorage.getItem('PlayersLeaderboard')) || {};
@@ -39,40 +40,40 @@ function endTraining(score){
   trainingEndMenu.style.display = 'block';
   endScore.innerText = "Ваш счет: " + score;
   id++;
-  playersLeaderboard[id] = {username:username, score: score};
+  playersLeaderboard[username] = score;
   localStorage.setItem('PlayersLeaderboard', JSON.stringify(playersLeaderboard));
 }
 
 function getLeaderboard(){
-  // playersLeaderboard = JSON.parse(localStorage.getItem('PlayersLeaderboard'));
-  var leaderboardBody = document.getElementById("leaderboard-table").getElementsByTagName("tbody")[0];
+  playersLeaderboard = JSON.parse(localStorage.getItem('PlayersLeaderboard'));
 
-  var sortedPlayerScores = Object.entries(playersLeaderboard).sort((a, b) => b[1].score - a[1].score);
+  var sortedPlayerScores = Object.entries(playersLeaderboard).sort((a, b) => b[1] - a[1]);
 
-  sortedPlayerScores.forEach(function([gameId, data], index) {
-    var row = document.createElement('tr');
-    var rankCell = document.createElement('td');
-    var playerNameCell = document.createElement('td');
-    var scoreCell = document.createElement('td');
+  sortedPlayerScores.forEach(function([user, score], index) {
+    if(index < 10){
+      var row = document.createElement('tr');
+      var rankCell = document.createElement('td');
+      var playerNameCell = document.createElement('td');
+      var scoreCell = document.createElement('td');
 
-    rankCell.textContent = index + 1;
-    playerNameCell.textContent = data.username;
-    scoreCell.textContent = data.score;
+      rankCell.textContent = index + 1;
+      playerNameCell.textContent = user;
+      scoreCell.textContent = score;
 
-    row.appendChild(rankCell);
-    row.appendChild(playerNameCell);
-    row.appendChild(scoreCell);
+      row.appendChild(rankCell);
+      row.appendChild(playerNameCell);
+      row.appendChild(scoreCell);
 
-    // Проверяем, является ли текущий айдишник последним в playerScores
-    if (gameId === id) {
-        row.style.fontWeight = 'bold';
-    }
-
-    leaderboardBody.appendChild(row);
-});
+      leaderboardBody.appendChild(row);
+      }
+      
+  });
 }
 
 function showLeaderboard(){
+  while (leaderboardBody.lastElementChild) {
+    leaderboardBody.removeChild(leaderboardBody.lastElementChild);
+  }
   getLeaderboard();
   leaderboard.style.display = 'block';
 }

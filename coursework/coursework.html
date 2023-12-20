@@ -23,6 +23,8 @@
 
     <div id="training-container" class="game-container">
       <button onclick="showMainMenu()">В главное меню</button>
+      <div id="tip">Зажмите левую кнопку мыши чтобы накопить энергию. 
+        Подберите силу удара так чтобы перебросить мяч через сетку и попасть в поле.</div>
       <div id="energy-bar">
         <div id="filler"></div>
       </div>
@@ -42,6 +44,7 @@
 
     <div id="one-player-container" class="game-container">
       <h1 id="score1" class="score">0:0</h1>
+      <div id="tip">Нажимайте клавиши ф(a) и в(d) чтобы передвигать своего игрока влево и вправо</div>
       <button onclick="showMainMenu()">В главное меню</button>
       <button onclick="startMatch()" id="start">Начать игру</button>
       <div id="player" class="player"></div>
@@ -53,6 +56,7 @@
 
     <div id="two-players-container" class="game-container">
       <h1 id="score" class="score">0:0</h1>
+      <div id="tip">Нажимайте клавиши "ф(a)" и "в(d)" для Игрока1 и клавиши "←" и "→" для Игрока2 чтобы передвигать своего игрока влево и вправо</div>
       <button onclick="showMainMenu()">В главное меню</button>
       <button onclick="startMatch2()" id="start">Начать игру</button>
       <div id="player1" class="player"></div>

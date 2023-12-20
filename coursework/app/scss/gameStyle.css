@@ -78,6 +78,7 @@ body {
   width: 10px;
   background-color: #2ecc71;
   left: 49%;
+  z-index: -1;
 }
 
 button {
@@ -107,16 +108,25 @@ button:hover {
 #energy-bar {
   position: absolute;
   left: 30%;
-  top: 15%;
+  top: 25%;
   width: 40%;
   height: 50px;
-  background-color: beige;
+  background-color: rgb(52, 148, 227);
 }
 
 #filler {
   height: 100%;
   width: 0%;
   background-color: #2ecc71;
+}
+
+#tip {
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  width: 30%;
+  text-align: center;
+  background-color: #50b7fb;
 }
 
 #computer{
@@ -128,7 +138,7 @@ button:hover {
 #start{
   position: absolute;
   left: 45%;
-  top: 15%;
+  top: 35%;
 }
 
 .score {
